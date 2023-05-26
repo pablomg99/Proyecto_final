@@ -3,14 +3,14 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <QPixmap>
-#include <sprite.h>
 
 
-class escena: public sprite
+class escena: public QGraphicsItem
 {
 public:
     escena();
-    escena(int sup, int inf, int iz, int der);
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
     void setLimits();
 };
 

@@ -7,6 +7,13 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+#include <QGraphicsScene>
+#include <escena.h>
+#include <QKeyEvent>
+#include <QList>
+#include <QGraphicsItem>
+
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -17,5 +24,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *scene;
+    escena *fondo;
 };
 #endif // MAINWINDOW_H

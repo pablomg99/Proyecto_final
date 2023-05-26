@@ -11,6 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
@@ -22,6 +24,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QGraphicsView *graphicsView;
+    QLabel *scoreLbl;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -29,12 +33,19 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
+        MainWindow->resize(832, 595);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
+        graphicsView = new QGraphicsView(centralwidget);
+        graphicsView->setObjectName("graphicsView");
+        graphicsView->setGeometry(QRect(10, 30, 810, 510));
+        scoreLbl = new QLabel(centralwidget);
+        scoreLbl->setObjectName("scoreLbl");
+        scoreLbl->setGeometry(QRect(10, 10, 151, 16));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
+        menubar->setGeometry(QRect(0, 0, 832, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -48,6 +59,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        scoreLbl->setText(QCoreApplication::translate("MainWindow", "Puntuacion:", nullptr));
     } // retranslateUi
 
 };

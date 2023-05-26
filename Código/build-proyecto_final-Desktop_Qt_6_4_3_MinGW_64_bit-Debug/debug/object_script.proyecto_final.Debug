@@ -1,0 +1,10 @@
+debug/escena.o
+debug/granjero.o
+debug/main.o
+debug/mainwindow.o
+debug/obstaculo.o
+debug/ovni.o
+debug/sprite.o
+debug/vaca.o
+debug/qrc_recursos.o
+debug/moc_mainwindow.o
