@@ -11,7 +11,7 @@ class vaca: public QGraphicsItem
     int alturaAbduccion;
 
 public:
-    int posx, posy;
+    int posx, posy, tamano;
     vaca();
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

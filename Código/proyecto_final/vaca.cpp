@@ -4,12 +4,13 @@ vaca::vaca()
 {
     this->posx= this->random(203, 768);
     this->posy= this->random(223,400);
+    this->tamano=30;
 
 }
 
 QRectF vaca::boundingRect() const
 {
-    return QRect(posx, posy, 30, 30);
+    return QRect(posx, posy, tamano, tamano);
 }
 
 void vaca::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

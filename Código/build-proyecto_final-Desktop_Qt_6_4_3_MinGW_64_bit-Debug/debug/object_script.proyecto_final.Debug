@@ -7,4 +7,5 @@ debug/obstaculo.o
 debug/ovni.o
 debug/vaca.o
 debug/qrc_recursos.o
+debug/moc_granjero.o
 debug/moc_mainwindow.o

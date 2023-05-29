@@ -22,7 +22,7 @@ ovni::ovni(int posx, int posy)
     this->y=posy;
     this->w=100;
     this->h=70;
-    this->vel=3;
+    this->vel=4;
     this->setPos(QPoint(x, y));
 }
 

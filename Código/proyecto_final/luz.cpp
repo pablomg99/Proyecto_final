@@ -11,7 +11,7 @@ luz::luz(int x, int y, int w, int h)
     this->posy=y;
     this->ancho=w;
     this->alto=h;
-    this->velocidad=3;
+    this->velocidad=4;
     setPos(QPoint(posx, posy));
 }
 

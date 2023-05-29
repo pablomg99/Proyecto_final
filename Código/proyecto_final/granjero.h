@@ -1,28 +1,29 @@
 #ifndef GRANJERO_H
 #define GRANJERO_H
+
 #include <QGraphicsItem>
-#include <QPainter>
+#include <QTimer>
 #include <QPixmap>
+#include <QObject>
+#include <QPainter>
 
-
-class granjero: public QGraphicsItem
+class granjero: public QObject, public QGraphicsItem
 {
-    int x, y, ancho, alto, velGiro;
-    QString sceneFarmer;
-
+    Q_OBJECT
 public:
-    granjero();
-    granjero(int x, int y, int ancho, int alto);
+    explicit granjero(QObject *parent=nullptr);
+
+    QTimer *timer;
+    QPixmap *granjeroPm;
+    float filas, columnas, ancho, alto;
+    int posx, posy, velocidad, contador;
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
-    void moveFieldOfView();
-    void increaseLevel();
-    bool verOVNI();
-    void atacar(bool verOVNI());
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void arriveToScene();
+signals:
+
+public slots:
+    void Actualizacion();
 };
 
 #endif // GRANJERO_H

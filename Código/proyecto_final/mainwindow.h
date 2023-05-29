@@ -16,6 +16,7 @@ QT_END_NAMESPACE
 #include "obstaculo.h"
 #include "ovni.h"
 #include "luz.h"
+#include "granjero.h"
 
 
 class MainWindow : public QMainWindow
@@ -34,6 +35,7 @@ private:
     QList<obstaculo*> paredes;
     ovni *ufo;
     luz *_luz;
+    granjero *_granjero;
 
     void keyPressEvent(QKeyEvent *evento);
     void keyReleaseEvent(QKeyEvent *event);

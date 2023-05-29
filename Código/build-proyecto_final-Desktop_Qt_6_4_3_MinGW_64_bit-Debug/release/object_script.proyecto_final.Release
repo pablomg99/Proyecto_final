@@ -7,4 +7,5 @@ release/obstaculo.o
 release/ovni.o
 release/vaca.o
 release/qrc_recursos.o
+release/moc_granjero.o
 release/moc_mainwindow.o
