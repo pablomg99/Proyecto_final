@@ -3,15 +3,18 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <QPixmap>
-#include <sprite.h>
+#include <QTimer>
 
 
-class ovni: public sprite
+class ovni: public QGraphicsItem
 {
 
 public:
+    int x, y, w, h, vel;
     ovni();
-    ovni(int posx, int posy, int ancho, int alto);
+    ovni(int posx, int posy);
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
     void moveUp();
     void moveDown();
     void moveLeft();

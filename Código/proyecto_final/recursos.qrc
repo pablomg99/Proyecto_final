@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>recursos/Fondo listo.jpg</file>
-        <file>recursos/ovni.png</file>
         <file>recursos/vaca.png</file>
         <file>recursos/vaca2.png</file>
         <file>recursos/vaquero_sprite-removebg-preview.png</file>
         <file>recursos/Luz_abd-removebg-preview.png</file>
+        <file>recursos/ovni.png</file>
     </qresource>
 </RCC>

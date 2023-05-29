@@ -33,7 +33,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(832, 595);
+        MainWindow->resize(832, 631);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         graphicsView = new QGraphicsView(centralwidget);

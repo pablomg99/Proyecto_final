@@ -3,6 +3,7 @@
 escena::escena()
 {
     setPos(0,0);
+
 }
 
 QRectF escena::boundingRect() const
@@ -14,10 +15,5 @@ void escena::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 {
     QPixmap pixmap(":/recursos/Fondo listo.jpg");
     painter->drawPixmap(boundingRect(), pixmap, pixmap.rect());
-}
-
-void escena::setLimits()
-{
-
 }
 

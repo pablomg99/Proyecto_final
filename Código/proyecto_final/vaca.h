@@ -3,21 +3,24 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <QPixmap>
-#include <sprite.h>
+#include <random>
 
 
-class vaca: public sprite
+class vaca: public QGraphicsItem
 {
     int alturaAbduccion;
 
 public:
+    int posx, posy;
     vaca();
-    vaca(int posx, int posy, int ancho, int alto);
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     bool esAbducida();
     bool finAbduccion();
     bool cae();
     void abducida(bool esAbducida);
     void caer(bool cae);
+    int random(int inicio, int fin);
 };
 
 #endif // VACA_H

@@ -11,20 +11,20 @@ CONFIG += c++17
 SOURCES += \
     escena.cpp \
     granjero.cpp \
+    luz.cpp \
     main.cpp \
     mainwindow.cpp \
     obstaculo.cpp \
     ovni.cpp \
-    sprite.cpp \
     vaca.cpp
 
 HEADERS += \
     escena.h \
     granjero.h \
+    luz.h \
     mainwindow.h \
     obstaculo.h \
     ovni.h \
-    sprite.h \
     vaca.h
 
 FORMS += \
