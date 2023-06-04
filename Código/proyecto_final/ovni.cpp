@@ -5,6 +5,21 @@ ovni::ovni()
 
 }
 
+ovni::ovni(int posx, int posy)
+{
+    x=posx;
+    y=posy;
+    w=100;
+    h=70;
+    velMax=25;
+    vel=3;
+    puntuacion=0;
+    moveUfoTimer=new QTimer;
+    setPos(QPoint(x, y));
+
+    connect(moveUfoTimer, &QTimer::timeout, this, &ovni::aceleracion);
+}
+
 QRectF ovni::boundingRect() const
 {
     return QRectF(x, y, w, h);
@@ -14,16 +29,6 @@ void ovni::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     QPixmap ufoPm(":/recursos/ovni.png");
     painter->drawPixmap(boundingRect(), ufoPm, ufoPm.rect());
-}
-
-ovni::ovni(int posx, int posy)
-{
-    this->x=posx;
-    this->y=posy;
-    this->w=100;
-    this->h=70;
-    this->vel=4;
-    this->setPos(QPoint(x, y));
 }
 
 void ovni::moveUp()
@@ -48,4 +53,12 @@ void ovni::moveRight()
 {
     x+=vel;
     setPos(QPoint(x, y));
+    /*if(vel<velMax){
+        vel+=1;
+    }*/
+}
+
+void ovni::aceleracion()
+{
+    vel+=3;
 }

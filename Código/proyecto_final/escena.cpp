@@ -8,7 +8,7 @@ escena::escena()
 
 QRectF escena::boundingRect() const
 {
-    return QRect(0, 0, 800, 500);
+    return QRect(0, 0, 800, 432);
 }
 
 void escena::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

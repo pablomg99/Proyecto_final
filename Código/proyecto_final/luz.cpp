@@ -11,7 +11,7 @@ luz::luz(int x, int y, int w, int h)
     this->posy=y;
     this->ancho=w;
     this->alto=h;
-    this->velocidad=4;
+    this->velocidad=3;
     setPos(QPoint(posx, posy));
 }
 
@@ -23,6 +23,7 @@ QRectF luz::boundingRect() const
 void luz::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pixmap(":/recursos/Luz_abd-removebg-preview.png");
+    painter->setOpacity(0.5);
     painter->drawPixmap(boundingRect(), pixmap, pixmap.rect());
 }
 

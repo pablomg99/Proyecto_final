@@ -11,6 +11,9 @@ QT_END_NAMESPACE
 #include <QKeyEvent>
 #include <QList>
 #include <QGraphicsItem>
+#include <QTimer>
+#include <QObject>
+#include <QThread>
 #include "escena.h"
 #include "vaca.h"
 #include "obstaculo.h"
@@ -37,8 +40,10 @@ private:
     luz *_luz;
     granjero *_granjero;
 
+    int cantVacas;
     void keyPressEvent(QKeyEvent *evento);
     void keyReleaseEvent(QKeyEvent *event);
-    bool evaluarColision();
+    bool colisionMuros();
+    bool colisionDeAbduccion();
 };
 #endif // MAINWINDOW_H

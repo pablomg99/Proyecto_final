@@ -38,10 +38,10 @@ public:
         centralwidget->setObjectName("centralwidget");
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName("graphicsView");
-        graphicsView->setGeometry(QRect(10, 30, 810, 510));
+        graphicsView->setGeometry(QRect(10, 30, 810, 442));
         scoreLbl = new QLabel(centralwidget);
         scoreLbl->setObjectName("scoreLbl");
-        scoreLbl->setGeometry(QRect(10, 10, 151, 16));
+        scoreLbl->setGeometry(QRect(10, 480, 151, 16));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");

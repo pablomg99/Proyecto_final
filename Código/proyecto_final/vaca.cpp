@@ -2,10 +2,16 @@
 
 vaca::vaca()
 {
-    this->posx= this->random(203, 768);
-    this->posy= this->random(223,400);
+    timerVaca = new QTimer();
     this->tamano=30;
+    this->posx = this->random(230, 800-tamano);
+    this->posy = this->random(234-tamano, 432-tamano);
+    velAbd = 4;
+    posx = posx/2;
+    posy = posy/2;
+    setPos(posx, posy);
 
+    connect(timerVaca, &QTimer::timeout, this, &vaca::abduccion);
 }
 
 QRectF vaca::boundingRect() const
@@ -16,8 +22,7 @@ QRectF vaca::boundingRect() const
 void vaca::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
-    int numero = random(0,1);
-    if (numero ==1){
+    if (sentido == 1){
         QPixmap vacaPm(":/recursos/vaca.png");
         painter->drawPixmap(boundingRect(), vacaPm, vacaPm.rect());
     }
@@ -25,31 +30,6 @@ void vaca::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         QPixmap vacaPm(":/recursos/vaca2.png");
         painter->drawPixmap(boundingRect(), vacaPm, vacaPm.rect());
     }
-}
-
-bool vaca::esAbducida()
-{
-
-}
-
-bool vaca::finAbduccion()
-{
-
-}
-
-bool vaca::cae()
-{
-
-}
-
-void vaca::abducida(bool esAbducida)
-{
-
-}
-
-void vaca::caer(bool cae)
-{
-
 }
 
 int vaca::random(int inicio, int fin)
@@ -60,4 +40,10 @@ int vaca::random(int inicio, int fin)
     std::uniform_int_distribution<int> dist(inicio, fin);
 
     return dist(gen);
+}
+
+void vaca::abduccion()
+{
+    posy -= velAbd;
+    setPos(QPoint(posx, posy));
 }
