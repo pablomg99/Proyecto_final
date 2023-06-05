@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0, 0, 800, 432);
 
     cantVacas=6;
+    cantVacasAux = cantVacas;
 
     paredes.push_back(new obstaculo(0,0,4,428));
     scene->addItem(paredes.back());
@@ -53,6 +54,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     _granjero->setPos(QPoint(_granjero->posx,_granjero->posy));
     _granjero->setVisible(false);
+
+
+    if(ufo->puntuacion == cantVacasAux){
+        ui->scoreLbl->setText("Juego terminado, puntuacion final: " + QString::number(ufo->puntuacion));
+    }
 }
 
 MainWindow::~MainWindow()
@@ -102,7 +108,30 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         for(int i=0; i<cantVacas; i++){
             aux=vacas.at(i);
             if(aux->collidesWithItem(_luz, Qt::ContainsItemBoundingRect)){
-                aux->timerVaca->start(100);
+                //aux->timerVaca->start(100);
+                aux->abduccion();
+            }
+            if(aux->collidesWithItem(ufo) and aux->collidesWithItem(_luz)){
+                scene->removeItem(aux);
+                if(ufo->puntuacion == cantVacasAux){
+                    ui->scoreLbl->setText("Juego terminado, puntuacion final: " + QString::number(ufo->puntuacion));
+                }
+                else{
+                   if(i == (cantVacas-1)){
+                       vacas.removeLast();
+                       cantVacas -= 1;
+                       ufo->puntuacion += 1;
+                       ui->scoreLbl->setText("Puntuacion: " + QString::number(ufo->puntuacion));
+                   }
+                   else{
+                       aux = vacas.at(cantVacas-1);
+                       vacas[i]=aux;
+                       vacas.removeLast();
+                       cantVacas -= 1;
+                       ufo->puntuacion += 1;
+                       ui->scoreLbl->setText("Puntuacion: " + QString::number(ufo->puntuacion));
+                   }
+                }
             }
         }
     }

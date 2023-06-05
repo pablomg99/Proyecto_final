@@ -40,7 +40,7 @@ private:
     luz *_luz;
     granjero *_granjero;
 
-    int cantVacas;
+    int cantVacas, cantVacasAux;
     void keyPressEvent(QKeyEvent *evento);
     void keyReleaseEvent(QKeyEvent *event);
     bool colisionMuros();
