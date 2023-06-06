@@ -3,6 +3,7 @@ debug/granjero.o
 debug/luz.o
 debug/main.o
 debug/mainwindow.o
+debug/mira.o
 debug/obstaculo.o
 debug/ovni.o
 debug/vaca.o

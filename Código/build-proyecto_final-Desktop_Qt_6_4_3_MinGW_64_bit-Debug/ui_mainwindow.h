@@ -26,6 +26,8 @@ public:
     QWidget *centralwidget;
     QGraphicsView *graphicsView;
     QLabel *scoreLbl;
+    QWidget *terminarJuegoWidget;
+    QLabel *terminarJuegoLbl;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -38,10 +40,24 @@ public:
         centralwidget->setObjectName("centralwidget");
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName("graphicsView");
-        graphicsView->setGeometry(QRect(10, 30, 810, 442));
+        graphicsView->setGeometry(QRect(10, 60, 810, 442));
         scoreLbl = new QLabel(centralwidget);
         scoreLbl->setObjectName("scoreLbl");
-        scoreLbl->setGeometry(QRect(10, 480, 151, 16));
+        scoreLbl->setGeometry(QRect(10, 10, 531, 16));
+        terminarJuegoWidget = new QWidget(centralwidget);
+        terminarJuegoWidget->setObjectName("terminarJuegoWidget");
+        terminarJuegoWidget->setGeometry(QRect(170, 140, 451, 251));
+        QFont font;
+        font.setPointSize(10);
+        terminarJuegoWidget->setFont(font);
+        terminarJuegoLbl = new QLabel(terminarJuegoWidget);
+        terminarJuegoLbl->setObjectName("terminarJuegoLbl");
+        terminarJuegoLbl->setGeometry(QRect(50, 80, 341, 91));
+        QFont font1;
+        font1.setPointSize(20);
+        terminarJuegoLbl->setFont(font1);
+        terminarJuegoLbl->setAutoFillBackground(true);
+        terminarJuegoLbl->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -60,6 +76,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         scoreLbl->setText(QCoreApplication::translate("MainWindow", "Puntuacion:", nullptr));
+        terminarJuegoLbl->setText(QCoreApplication::translate("MainWindow", "\302\241 JUEGO TERMINADO !", nullptr));
     } // retranslateUi
 
 };

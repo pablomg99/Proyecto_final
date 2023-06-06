@@ -10,7 +10,7 @@ granjero::granjero(QObject *parent)
     alto=100;
     posx=120;
     posy=285;
-    velocidad=2;
+    velocidad=7;
     contador=0;
 
     connect(timer, &QTimer::timeout, this, &granjero::Actualizacion);
@@ -34,7 +34,7 @@ void granjero::arriveToScene()
 {
     if(posx >= 500){
         columnas = 237;
-        filas=274;
+        filas = 274;
         timer->stop();
     }
     posx+=velocidad;

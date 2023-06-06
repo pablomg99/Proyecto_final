@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>30</y>
+      <y>60</y>
       <width>810</width>
       <height>442</height>
      </rect>
@@ -28,14 +28,53 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>480</y>
-      <width>151</width>
+      <y>10</y>
+      <width>531</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string>Puntuacion:</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="terminarJuegoWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>140</y>
+      <width>451</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <widget class="QLabel" name="terminarJuegoLbl">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>80</y>
+       <width>341</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>¡ JUEGO TERMINADO !</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

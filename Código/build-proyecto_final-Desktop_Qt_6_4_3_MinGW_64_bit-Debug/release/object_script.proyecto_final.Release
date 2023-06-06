@@ -3,6 +3,7 @@ release/granjero.o
 release/luz.o
 release/main.o
 release/mainwindow.o
+release/mira.o
 release/obstaculo.o
 release/ovni.o
 release/vaca.o

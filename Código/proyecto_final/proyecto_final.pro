@@ -14,6 +14,7 @@ SOURCES += \
     luz.cpp \
     main.cpp \
     mainwindow.cpp \
+    mira.cpp \
     obstaculo.cpp \
     ovni.cpp \
     vaca.cpp
@@ -23,6 +24,7 @@ HEADERS += \
     granjero.h \
     luz.h \
     mainwindow.h \
+    mira.h \
     obstaculo.h \
     ovni.h \
     vaca.h

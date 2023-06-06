@@ -6,5 +6,6 @@
         <file>recursos/vaquero_sprite-removebg-preview.png</file>
         <file>recursos/Luz_abd-removebg-preview.png</file>
         <file>recursos/ovni.png</file>
+        <file>recursos/mira.png</file>
     </qresource>
 </RCC>

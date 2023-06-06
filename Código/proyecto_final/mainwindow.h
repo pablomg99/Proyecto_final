@@ -20,6 +20,7 @@ QT_END_NAMESPACE
 #include "ovni.h"
 #include "luz.h"
 #include "granjero.h"
+#include "mira.h"
 
 
 class MainWindow : public QMainWindow
@@ -30,20 +31,29 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void iniciarMira();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+    QTimer *miraTimer;
     escena *fondo;
     QList<vaca*> vacas;
     QList<obstaculo*> paredes;
     ovni *ufo;
     luz *_luz;
     granjero *_granjero;
+    mira *_mira;
 
     int cantVacas, cantVacasAux;
+    bool miraImpresa;
     void keyPressEvent(QKeyEvent *evento);
     void keyReleaseEvent(QKeyEvent *event);
     bool colisionMuros();
     bool colisionDeAbduccion();
+    bool colisionMira();
+    void juegoTerminado(QString string);
+    void capturado();
 };
 #endif // MAINWINDOW_H

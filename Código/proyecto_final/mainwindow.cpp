@@ -10,9 +10,11 @@ MainWindow::MainWindow(QWidget *parent)
     scene= new QGraphicsScene;
     ui->graphicsView->setScene(scene);
     scene->setSceneRect(0, 0, 800, 432);
+    ui->terminarJuegoWidget->setVisible(false);
 
-    cantVacas=6;
+    cantVacas=3;
     cantVacasAux = cantVacas;
+    miraImpresa = 0;
 
     paredes.push_back(new obstaculo(0,0,4,428));
     scene->addItem(paredes.back());
@@ -24,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addItem(paredes.back());
 
     fondo=new escena();
+    miraTimer = new QTimer();
+
     scene->addItem(fondo);
 
     ufo=new ovni(2, 2);
@@ -47,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     scene->addItem(ufo);
 
+    _mira = new mira();
     _granjero=new granjero();
     _granjero->setScale(0.4);
     scene->addItem(_granjero);
@@ -55,10 +60,9 @@ MainWindow::MainWindow(QWidget *parent)
     _granjero->setPos(QPoint(_granjero->posx,_granjero->posy));
     _granjero->setVisible(false);
 
+    connect(miraTimer, SIGNAL(timeout()), this, SLOT(iniciarMira()));
+    connect(miraTimer, SIGNAL(timeout()), this, SLOT(capturado()));
 
-    if(ufo->puntuacion == cantVacasAux){
-        ui->scoreLbl->setText("Juego terminado, puntuacion final: " + QString::number(ufo->puntuacion));
-    }
 }
 
 MainWindow::~MainWindow()
@@ -96,6 +100,8 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     else if(evento->key() == Qt::Key_Space){
         vaca *aux;
         _luz->setVisible(true);
+        miraTimer->start(50);
+
 
         if(! _granjero->isVisible()){
             _granjero->setVisible(true);
@@ -108,28 +114,34 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         for(int i=0; i<cantVacas; i++){
             aux=vacas.at(i);
             if(aux->collidesWithItem(_luz, Qt::ContainsItemBoundingRect)){
-                //aux->timerVaca->start(100);
                 aux->abduccion();
             }
             if(aux->collidesWithItem(ufo) and aux->collidesWithItem(_luz)){
                 scene->removeItem(aux);
-                if(ufo->puntuacion == cantVacasAux){
-                    ui->scoreLbl->setText("Juego terminado, puntuacion final: " + QString::number(ufo->puntuacion));
-                }
-                else{
-                   if(i == (cantVacas-1)){
-                       vacas.removeLast();
-                       cantVacas -= 1;
-                       ufo->puntuacion += 1;
+               if(i == (cantVacas-1)){
+                   vacas.removeLast();
+                   cantVacas -= 1;
+                   ufo->puntuacion += 1;
+                   if(ufo->puntuacion == cantVacasAux){
                        ui->scoreLbl->setText("Puntuacion: " + QString::number(ufo->puntuacion));
+                       juegoTerminado("FELICITACIONES, HA GANADO");
                    }
                    else{
-                       aux = vacas.at(cantVacas-1);
-                       vacas[i]=aux;
-                       vacas.removeLast();
-                       cantVacas -= 1;
-                       ufo->puntuacion += 1;
+                    ui->scoreLbl->setText("Puntuacion: " + QString::number(ufo->puntuacion));
+                   }
+               }
+               else{
+                   aux = vacas.at(cantVacas-1);
+                   vacas[i]=aux;
+                   vacas.removeLast();
+                   cantVacas -= 1;
+                   ufo->puntuacion += 1;
+                   if(ufo->puntuacion == cantVacasAux){
                        ui->scoreLbl->setText("Puntuacion: " + QString::number(ufo->puntuacion));
+                       juegoTerminado("FELICITACIONES, HA GANADO");
+                   }
+                   else{
+                    ui->scoreLbl->setText("Puntuacion: " + QString::number(ufo->puntuacion));
                    }
                 }
             }
@@ -201,3 +213,48 @@ bool MainWindow::colisionDeAbduccion()
 
 }
 
+bool MainWindow::colisionMira()
+{
+    if(_luz->isVisible()){
+        if(_mira->collidesWithItem(_luz)){
+            return true;
+        }
+    }
+    else{
+        return false;
+    }
+
+    if(_mira->collidesWithItem(ufo)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void MainWindow::juegoTerminado(QString string)
+{
+    scene->removeItem(ufo);
+    scene->removeItem(_luz);
+    scene->removeItem(_granjero);
+    ui->terminarJuegoLbl->setText(string);
+    ui->terminarJuegoWidget->setVisible(true);
+}
+
+void MainWindow::capturado()
+{
+    if(colisionMira()){
+        juegoTerminado("HA SIDO CAPTURADO");
+    }
+}
+
+void MainWindow::iniciarMira()
+{
+    if(!_granjero->timer->isActive()){
+        if(miraImpresa == 0){
+            scene->addItem(_mira);
+            miraImpresa = 1;
+        }
+        _mira->barrido();
+    }
+}
