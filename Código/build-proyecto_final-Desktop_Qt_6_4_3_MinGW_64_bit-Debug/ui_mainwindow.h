@@ -52,7 +52,7 @@ public:
         terminarJuegoWidget->setFont(font);
         terminarJuegoLbl = new QLabel(terminarJuegoWidget);
         terminarJuegoLbl->setObjectName("terminarJuegoLbl");
-        terminarJuegoLbl->setGeometry(QRect(50, 80, 341, 91));
+        terminarJuegoLbl->setGeometry(QRect(-60, 80, 561, 91));
         QFont font1;
         font1.setPointSize(20);
         terminarJuegoLbl->setFont(font1);

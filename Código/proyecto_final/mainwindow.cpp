@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0, 0, 800, 432);
     ui->terminarJuegoWidget->setVisible(false);
 
-    cantVacas=3;
+    cantVacas=8;
     cantVacasAux = cantVacas;
     miraImpresa = 0;
 
@@ -85,12 +85,14 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         }
     }
     else if(evento->key() == Qt::Key_A){
+        ufo->moveUfoTimer->start(50);
         if(!colisionMuros()){
             ufo->moveLeft();
             _luz->moveLeft();
         }
     }
     else if(evento->key() == Qt::Key_D){
+        ufo->moveUfoTimer->start(50);
         if(!colisionMuros()){
             ufo->moveRight();
             _luz->moveRight();
@@ -166,6 +168,10 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         }
     }
     else if(event->key() == Qt::Key::Key_A){
+        if(! event->isAutoRepeat()){
+            ufo->moveUfoTimer->stop();
+            ufo->restartSpeed();
+        }
         if(colisionMuros()){
             ufo->moveRight();
             _luz->moveRight();
@@ -178,6 +184,10 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         }
     }
     else if(event->key() == Qt::Key_D){
+        if(! event->isAutoRepeat()){
+            ufo->moveUfoTimer->stop();
+            ufo->restartSpeed();
+        }
         if(colisionMuros()){
             ufo->moveLeft();
             _luz->moveLeft();
@@ -201,35 +211,35 @@ bool MainWindow::colisionMuros()
 bool MainWindow::colisionDeAbduccion()
 {
     vaca *_vaquita;
+    bool retorno=false;
     for(int i=0; i<cantVacas; i++){
         _vaquita=vacas.at(i);
         if(_vaquita->collidesWithItem(ufo, Qt::ContainsItemBoundingRect)){
-            return true;
+            retorno= true;
         }
         else{
-            return false;
+            retorno= false;
         }
     }
-
+    return retorno;
 }
 
 bool MainWindow::colisionMira()
 {
+    bool retorno=false;
     if(_luz->isVisible()){
-        if(_mira->collidesWithItem(_luz)){
-            return true;
+        if(_mira->collidesWithItem(ufo)){
+            retorno= true;
         }
     }
+    else if(_mira->collidesWithItem(ufo)){
+        retorno= true;
+    }
     else{
-        return false;
+        retorno= false;
     }
 
-    if(_mira->collidesWithItem(ufo)){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return retorno;
 }
 
 void MainWindow::juegoTerminado(QString string)
@@ -237,6 +247,7 @@ void MainWindow::juegoTerminado(QString string)
     scene->removeItem(ufo);
     scene->removeItem(_luz);
     scene->removeItem(_granjero);
+    scene->removeItem(_mira);
     ui->terminarJuegoLbl->setText(string);
     ui->terminarJuegoWidget->setVisible(true);
 }
@@ -244,7 +255,7 @@ void MainWindow::juegoTerminado(QString string)
 void MainWindow::capturado()
 {
     if(colisionMira()){
-        juegoTerminado("HA SIDO CAPTURADO");
+        juegoTerminado("HA SIDO CAPTURADO\nFIN DEL JUEGO");
     }
 }
 

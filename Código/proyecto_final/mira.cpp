@@ -2,8 +2,8 @@
 
 mira::mira()
 {
-    posx=225;
-    posy=225;
+    posx=200;
+    posy=200;
     posx=posx/2;
     posy=posy/2;
     tamano=70;
@@ -33,12 +33,12 @@ void mira::barrido()
 
         else{
             posx=225/2;
-            posy += (3*velocidad);
+            posy += (5*velocidad);
         }
     }
     else{
-        posx=225/2;
-        posy=225/2;
+        posx=200/2;
+        posy=200/2;
     }
 
     setPos(posx,posy);

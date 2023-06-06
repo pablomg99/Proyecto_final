@@ -11,12 +11,13 @@ class ovni: public QObject, public QGraphicsItem
 {
 
 public:
-    int x, y, w, h, vel, velMax, puntuacion;
+    int x, y, w, h, vel, a, puntuacion;
     ovni();
     ovni(int posx, int posy);
     QTimer *moveUfoTimer;
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+    void restartSpeed();
     void moveUp();
     void moveDown();
     void moveLeft();
