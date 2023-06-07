@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0, 0, 800, 432);
     ui->terminarJuegoWidget->setVisible(false);
 
-    cantVacas=8;
+    cantVacas=3;
     cantVacasAux = cantVacas;
     miraImpresa = 0;
 
@@ -61,6 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
     _granjero->setVisible(false);
 
     connect(miraTimer, SIGNAL(timeout()), this, SLOT(iniciarMira()));
+    connect(miraTimer, SIGNAL(timeout()), this, SLOT(colisionMira()));
     connect(miraTimer, SIGNAL(timeout()), this, SLOT(capturado()));
 
 }
@@ -86,6 +87,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     }
     else if(evento->key() == Qt::Key_A){
         ufo->moveUfoTimer->start(50);
+        _luz->luzTimer->start(50);
         if(!colisionMuros()){
             ufo->moveLeft();
             _luz->moveLeft();
@@ -93,6 +95,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
     }
     else if(evento->key() == Qt::Key_D){
         ufo->moveUfoTimer->start(50);
+        _luz->luzTimer->start(50);
         if(!colisionMuros()){
             ufo->moveRight();
             _luz->moveRight();
@@ -171,6 +174,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if(! event->isAutoRepeat()){
             ufo->moveUfoTimer->stop();
             ufo->restartSpeed();
+            _luz->luzTimer->stop();
+            _luz->restartSpeed();
         }
         if(colisionMuros()){
             ufo->moveRight();
@@ -187,6 +192,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
         if(! event->isAutoRepeat()){
             ufo->moveUfoTimer->stop();
             ufo->restartSpeed();
+            _luz->luzTimer->stop();
+            _luz->restartSpeed();
         }
         if(colisionMuros()){
             ufo->moveLeft();
@@ -227,18 +234,13 @@ bool MainWindow::colisionDeAbduccion()
 bool MainWindow::colisionMira()
 {
     bool retorno=false;
-    if(_luz->isVisible()){
-        if(_mira->collidesWithItem(ufo)){
-            retorno= true;
-        }
+    if(_luz->isVisible() and _mira->collidesWithItem(_luz)){
+        retorno= true;
+
     }
-    else if(_mira->collidesWithItem(ufo)){
+    if(_mira->collidesWithItem(ufo)){
         retorno= true;
     }
-    else{
-        retorno= false;
-    }
-
     return retorno;
 }
 
@@ -267,5 +269,8 @@ void MainWindow::iniciarMira()
             miraImpresa = 1;
         }
         _mira->barrido();
+    }
+    if(colisionMira()){
+        juegoTerminado("HA SIDO CAPTURADO\nFIN DEL JUEGO");
     }
 }
